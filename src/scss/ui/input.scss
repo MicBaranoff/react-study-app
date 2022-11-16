@@ -1,0 +1,16 @@
+.input{
+  -webkit-appearance: none;
+  border: 1px solid $dark;
+  outline:none;
+  padding: 5px 10px;
+  color: $dark;
+  background: #fff;
+  font-size: 18px;
+  width: 100%;
+}
+
+.textarea{
+  width: 100%;
+  resize: none;
+  height: 100px;
+}

@@ -1,0 +1,33 @@
+.app-container {
+  display: grid;
+  min-height: 100vh;
+  /* ! */
+  grid-template-areas:
+"header header header"
+"nav content content"
+"footer footer footer";
+  grid-template-rows: 100px 1fr 100px;
+  grid-template-columns: 2fr 10fr;
+  grid-gap: 10px;
+  padding: 0 15px;
+  align-items: stretch;
+  &__header{
+    grid-area: header;
+  }
+  &__sidebar{
+    grid-area: nav;
+  }
+  &__content{
+    grid-area: content;
+  }
+  &__footer{
+    grid-area: footer;
+  }
+}
+
+
+.app {
+  background-color: $dark;
+  color: #fff;
+  font-family: $regular;
+}

@@ -1,0 +1,16 @@
+.header{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  &__list{
+    display: flex;
+  }
+  &__logo{
+    width: 70px;
+    height: 70px;
+    display: block;
+    img{
+      width: 100%;
+    }
+  }
+}

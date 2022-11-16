@@ -1,0 +1,21 @@
+.sidebar{
+  padding: 0 15px;
+  &__list{
+    list-style: none;
+    padding: 0;
+  }
+  &__list-item{
+    margin-bottom: 10px;
+  }
+  &__link{
+    font-size: 20px;
+    color: #fff;
+    transition: color .1s ease;
+    &.active{
+      color: $red;
+    }
+    &:not(.active):hover{
+      color: $purple ;
+    }
+  }
+}
