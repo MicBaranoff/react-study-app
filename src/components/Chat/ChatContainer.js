@@ -2,6 +2,7 @@ import React from "react";
 import Message from '../Message'
 import {updateNewMessageActionCreator,sendMessageActionCreator} from "../../redux/dialogs-reducer";
 import Chat from "./Chat";
+import {connect} from "react-redux";
 
 let messageInput = React.createRef();
 
@@ -22,5 +23,16 @@ const chatContainer = ({data, dispatch, newMessage}) => {
         />
     )
 }
+
+const f1 = () => {
+    return {
+        data,
+    }
+}
+const f2 = () => {
+    return {}
+}
+
+const SuperChatContainer = connect(f1, f2)(Chat);
 
 export default chatContainer;
