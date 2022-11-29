@@ -1,5 +1,5 @@
 import React from "react";
-import {NavLink} from "react-router-dom";
+//import {NavLink} from "react-router-dom";
 import DialogItem from "../components/DialogItem"
 import ChatContainer from "../components/Chat/ChatContainer";
 
@@ -20,7 +20,7 @@ const dialogs = (props) => {
                                 <DialogItem key={index} avatar={item.avatar} name={item.name} id={item.id}></DialogItem>)
                         }
                     </section>
-                    <ChatContainer newMessage={props.newMessage} dispatch={props.dispatch} data={ dialogs[0].chat}></ChatContainer>
+                    <ChatContainer dispatch={props.dispatch} data={ dialogs[0].chat}></ChatContainer>
                 </div>
 
             </div>

@@ -2,15 +2,16 @@ import React from "react";
 import Message from '../Message'
 
 let messageInput = React.createRef();
-const chat = ({data, newMessage, sendMessage, updateNewMessage}) => {
-    const chatData = data;
+const chat = (props) => {
+    console.log(props);
+    const chatData = props.dialogsData.list[0].chat;
     const onChangeMessage = () => {
         let text = messageInput.current.value;
-        updateNewMessage(text);
+        props.updateNewMessage(text);
     }
     const sendBtnHandler = () => {
         let text = messageInput.current.value;
-        sendMessage(text);
+        props.sendMessage(text);
     }
     return (
         <section className="chat">
@@ -26,7 +27,7 @@ const chat = ({data, newMessage, sendMessage, updateNewMessage}) => {
             <div className="footer-chat">
                 <i className="icon fa fa-smile-o clickable" aria-hidden="true"></i>
                 <input onChange={onChangeMessage} ref={messageInput} type="text" className="write-message"
-                       placeholder="Type your message here" value={newMessage}></input>
+                    placeholder="Type your message here" value={props.dialogsData.newMessage}></input>
                 <button onClick={sendBtnHandler} className="icon send clickable">
                     Send
                 </button>

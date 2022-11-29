@@ -156,24 +156,28 @@ let initialState = {
     currentDialogID: 0,
 };
 
-const sendNewMessage = (state) => {
-    state.list[state.currentDialogID].chat.push({
-        self: true,
-        text: state.newMessage,
-        avatar: null,
-    });
-};
-
 const dialogReducer = (state = initialState, action) => {
     switch (action.type) {
         case UPDATE_NEW_MESSAGE:
-            state.newMessage = action.value;
-            break;
+            return {
+                ...state,
+                newMessage: action.value,
+            };
         case SEND_MESSAGE:
-            sendNewMessage(state);
-            break;
+            let stateCopy = {
+                ...state,
+                list: [...state.list],
+                newMessage: '',
+            }
+            stateCopy.list[state.currentDialogID].chat.push({
+                self: true,
+                text: state.newMessage,
+                avatar: null,
+            });
+            return stateCopy;
+        default:
+            return state;
     }
-    return state;
 };
 
 

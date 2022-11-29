@@ -38,7 +38,6 @@ let initialState = {
 //}
 
 const postsReducer = (state = initialState, action) => {
-    let stateCopy;
     switch (action.type) {
         case ADD_POST:
             return {
