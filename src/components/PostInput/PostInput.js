@@ -4,31 +4,32 @@ const postTitle = React.createRef();
 const postText = React.createRef();
 const postImg = React.createRef();
 
-const postInput = ({className, newPostText, newPostTitle, sendPost, updateNewPostTitle, updateNewPostText}) => {
+const postInput = (props) => {
+    const postsData = props.postsData;
     const postBtnHandler = () => {
         let title = postTitle.current.value;
         let text = postText.current.value;
-        if (title && text) sendPost();
+        if (title && text) props.sendPost();
     }
     const onChangeTitle = () => {
         let text = postTitle.current.value;
-        updateNewPostTitle(text);
+        props.updateNewPostTitle(text);
     }
     const onChangeText = () => {
         let text = postText.current.value;
-        updateNewPostText(text);
+        props.updateNewPostText(text);
     }
     return (
-        <div className={'postInput ' + className}>
+            <div className={'postInput ' + props.className}>
             <input ref={postTitle} className={'input'}
                    placeholder={'type your title'}
-                   value={newPostTitle}
+                value={postsData.newPostTitle}
                    name=""
                    onChange={onChangeTitle}
             >
             </input>
             <textarea ref={postText} className={'textarea input'}
-                      value={newPostText}
+                value={postsData.newPostText}
                       placeholder={'type your post'}
                       onChange={onChangeText}
                       name="">

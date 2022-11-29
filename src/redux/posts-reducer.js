@@ -27,29 +27,42 @@ let initialState = {
     newPostText: 'post text'
 }
 
-const addPost = (state) => {
-    const post = {
-        id: state.posts.length++,
-        title: state.newPostTitle,
-        text: state.newPostText,
-        img: '/images/post.jpeg',
-    };
-    state.posts.push(post);
-}
+//const addPost = (state, posts) => {
+//    const post = {
+//        id: posts.length++,
+//        title: state.newPostTitle,
+//        text: state.newPostText,
+//        img: '/images/post.jpeg',
+//    };
+//    posts.push(post);
+//}
 
 const postsReducer = (state = initialState, action) => {
+    let stateCopy;
     switch (action.type) {
         case ADD_POST:
-            addPost(state);
-            break;
+            return {
+                ...state,
+                posts: [...state.posts, {
+                    id: state.posts.length++,
+                    title: state.newPostTitle,
+                    text: state.newPostText,
+                    img: '/images/post.jpeg',
+                }]
+            };
         case UPDATE_NEW_POST_TITLE:
-            state.newPostTitle = action.value;
-            break;
+            return {
+                ...state,
+                newPostTitle: action.value
+            };
         case UPDATE_NEW_POST_TEXT:
-            state.newPostText = action.value;
-            break;
+            return {
+                ...state,
+                newPostText: action.value
+            };
+        default:
+            return state;
     }
-    return state;
 }
 
 export const addPostActionCreator = () => {

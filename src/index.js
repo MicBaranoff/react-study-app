@@ -7,23 +7,22 @@ import { BrowserRouter } from 'react-router-dom';
 import {Provider} from "react-redux";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-const renderApp = (state) => {
-    root.render(
+root.render(
         <React.StrictMode>
             <BrowserRouter>
-                <Provider store={state}>
+                <Provider store={store}>
                     <App
                         dispatch={store.dispatch.bind(store)}
-                        data={state}
+                        data={store}
                     />
                 </Provider>
             </BrowserRouter>
         </React.StrictMode>
-    );
-}
+        );
+
+window.store = store;
 // store.subscribe(renderApp);
-store.subscribe(() => {
-    // let state = store.getState();
-    renderApp(store);
-})
-renderApp(store);
+//store.subscribe(() => {
+//    // let state = store.getState();
+//    renderApp(store);
+//})
