@@ -3,7 +3,6 @@ import Message from '../Message'
 
 let messageInput = React.createRef();
 const chat = (props) => {
-    console.log(props);
     const chatData = props.dialogsData.list[0].chat;
     const onChangeMessage = () => {
         let text = messageInput.current.value;

@@ -20,6 +20,9 @@ const sidebar = ({className}) => {
                     <li className="sidebar__list-item">
                         <NavLink className={({ isActive }) => (isActive ? "active" : "") + " sidebar__link"} to="/contacts">Contacts</NavLink>
                     </li>
+                    <li className="sidebar__list-item">
+                        <NavLink className={({ isActive }) => (isActive ? "active" : "") + " sidebar__link"} to="/users">Users</NavLink>
+                    </li>
                 </ul>
         </div>
     )

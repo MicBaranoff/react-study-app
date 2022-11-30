@@ -3,6 +3,7 @@ import Profile from '../../pages/Profile'
 import Posts from '../../pages/Posts'
 import Dialogs from "../../pages/Dialogs";
 import Home from "../../pages/Home";
+import UsersContainer from "../../pages/Users/UsersContainer";
 import {
     BrowserRouter as Router,
     Routes,
@@ -23,6 +24,7 @@ const content = ({className, data, dispatch}) => {
                     data={postData.posts}/>}/>
                 <Route path='/dialogs/*' element={<Dialogs newMessage={dialogsData.newMessage}
                                                            dispatch={dispatch} data={dialogsData.list}/>}/>
+                <Route index path='/users' element={<UsersContainer/>}/>
                 <Route index path='/' element={<Home/>}/>
             </Routes>
         </div>
