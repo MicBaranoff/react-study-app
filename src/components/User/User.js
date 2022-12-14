@@ -2,7 +2,6 @@ import React from "react";
 import Button from "../ui/Button";
 
 const user = (props) => {
-    console.log(props.id);
     return (
             <div className={'profile ' + props.className}>
                 <div className={'profile__avatar'}>
