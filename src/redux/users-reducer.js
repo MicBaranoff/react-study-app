@@ -1,9 +1,14 @@
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
+const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
 
 let initialState = {
     users: [],
+    pageSize: 5,
+    totalUsersCount: 0,
+    currentPage: 1,
 //    users: [
 //        {
 //            id: 1,
@@ -49,10 +54,19 @@ const usersReducer = (state = initialState, action) => {
                 })
             }
         case SET_USERS:
-            console.log(...action.value)
             return {
                 ...state,
-                users: [...state.users, ...action.value],
+                users: action.value,
+            }
+        case SET_CURRENT_PAGE:
+            return {
+                ...state,
+                currentPage: action.value,
+            }
+        case SET_TOTAL_USERS_COUNT:
+            return {
+                ...state,
+                totalUsersCount: action.value,
             }
         default:
             return state;
@@ -75,6 +89,14 @@ export const unfollowUserActionCreator = (userID) => {
 
 export const setUsersActionCreator = (users) => {
     return {type: SET_USERS, value: users}
+}
+
+export const setCurrentPageActionCreator = (value) => {
+    return {type: SET_CURRENT_PAGE, value}
+}
+
+export const setTotalUsersCountActionCreator = (value) => {
+    return {type: SET_TOTAL_USERS_COUNT, value}
 }
 
 export default usersReducer;

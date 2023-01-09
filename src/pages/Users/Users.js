@@ -12,16 +12,39 @@ class Users extends React.Component {
         this.getUsers();
     }
 
+    onPageChanged(page) {
+        this.props.setCurrentPage(page);
+        this.props.setUsers([]);
+        this.getUsers();
+    }
+
     getUsers() {
-        axios.get('https://social-network.samuraijs.com/api/1.0/users?count=10').then((res) => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then((res) => {
             this.props.setUsers(res.data.items);
+            this.props.setTotalUsersCount(res.data.totalCount);
         })
     }
 
     render() {
+        const pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize);
+        let pages = [];
+        for (let  i = 1; i<= pagesCount; i++) {
+            pages.push(i);
+        }
         return (
                 <div className={'users'}>
                     <h2>Users</h2>
+                    <div>
+                        {
+                            pages.map(p => {
+                               return <button
+                                   onClick={() => { this.onPageChanged(p) }}
+                                   className={this.props.currentPage === p ? 'users__nav-item--active' : undefined} key={p}>
+                                   {p}
+                               </button>
+                            })
+                        }
+                    </div>
                     {
                         this.props.users.map((user, index) => {
                             if (user) {
