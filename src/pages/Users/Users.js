@@ -1,28 +1,12 @@
 import React from "react";
 import User from "../../components/User/User";
 import Button from "../../components/ui/Button";
-import axios from "axios";
+import ReactDOM from 'react-dom';
+import ReactPaginate from 'react-paginate';
 
 class Users extends React.Component {
     constructor(props) {
         super(props);
-    }
-
-    componentDidMount() {
-        this.getUsers();
-    }
-
-    onPageChanged(page) {
-        this.props.setCurrentPage(page);
-        this.props.setUsers([]);
-        this.getUsers();
-    }
-
-    getUsers() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then((res) => {
-            this.props.setUsers(res.data.items);
-            this.props.setTotalUsersCount(res.data.totalCount);
-        })
     }
 
     render() {
@@ -34,17 +18,6 @@ class Users extends React.Component {
         return (
                 <div className={'users'}>
                     <h2>Users</h2>
-                    <div>
-                        {
-                            pages.map(p => {
-                               return <button
-                                   onClick={() => { this.onPageChanged(p) }}
-                                   className={this.props.currentPage === p ? 'users__nav-item--active' : undefined} key={p}>
-                                   {p}
-                               </button>
-                            })
-                        }
-                    </div>
                     {
                         this.props.users.map((user, index) => {
                             if (user) {
@@ -61,6 +34,28 @@ class Users extends React.Component {
                             }
                         })
                     }
+                    {/*<div>*/}
+                    {/*    {*/}
+                    {/*        pages.map(p => {*/}
+                    {/*           return <button*/}
+                    {/*               onClick={() => { this.props.onPageChanged(p) }}*/}
+                    {/*               className={this.props.currentPage === p ? 'users__nav-item--active' : undefined} key={p}>*/}
+                    {/*               {p}*/}
+                    {/*           </button>*/}
+                    {/*        })*/}
+                    {/*    }*/}
+                    {/*</div>*/}
+                    <div className="users__pagination">
+                        <ReactPaginate
+                            breakLabel="..."
+                            nextLabel="next >"
+                            onPageChange={this.props.onPageChanged}
+                            pageRangeDisplayed={5}
+                            pageCount={pages.length}
+                            previousLabel="< previous"
+                            renderOnZeroPageCount={null}
+                        />
+                    </div>
                     <div className={'users__button'}>
                         <Button text={'Show more'}></Button>
                     </div>

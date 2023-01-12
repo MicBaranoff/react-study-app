@@ -3,12 +3,14 @@ const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
+const TOGGLE_LOADING = 'TOGGLE_LOADING';
 
 let initialState = {
     users: [],
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1,
+    isLoading: false,
 //    users: [
 //        {
 //            id: 1,
@@ -68,35 +70,43 @@ const usersReducer = (state = initialState, action) => {
                 ...state,
                 totalUsersCount: action.value,
             }
+        case TOGGLE_LOADING:
+            return {
+                ...state,
+                isLoading: action.value,
+            }
         default:
             return state;
     }
 };
 
 
-export const followUserActionCreator = (userID) => {
+export const followUser = (userID) => {
     return {
         type: FOLLOW,
         value: userID,
     }
 }
-export const unfollowUserActionCreator = (userID) => {
+export const unfollowUser = (userID) => {
     return {
         type: UNFOLLOW,
         value: userID,
     }
 }
 
-export const setUsersActionCreator = (users) => {
+export const setUsers = (users) => {
     return {type: SET_USERS, value: users}
 }
 
-export const setCurrentPageActionCreator = (value) => {
+export const setCurrentPage = (value) => {
     return {type: SET_CURRENT_PAGE, value}
 }
 
-export const setTotalUsersCountActionCreator = (value) => {
+export const setTotalUsersCount = (value) => {
     return {type: SET_TOTAL_USERS_COUNT, value}
+}
+export const toggleLoading = (value) => {
+    return {type: TOGGLE_LOADING, value}
 }
 
 export default usersReducer;
