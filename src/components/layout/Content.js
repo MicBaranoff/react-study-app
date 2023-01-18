@@ -16,7 +16,7 @@ const content = ({className, data, dispatch}) => {
     return (
         <div className={`content ${className}`}>
             <Routes>
-                <Route path='/profile' element={<Profile data={'data'}/>}/>
+                <Route path='/profile/:id' element={<Profile data={'data'}/>}/>
                 <Route path='/posts' element={<Posts
                     newPostTitle={postData.newPostTitle}
                     newPostText={postData.newPostText}

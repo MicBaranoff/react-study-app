@@ -10,6 +10,7 @@ import {
 import {connect} from "react-redux";
 import axios from "axios";
 import Users from "./Users";
+import {usersApi} from "../../Api/api";
 
 class UsersContainer extends React.Component {
     constructor(props) {
@@ -18,20 +19,23 @@ class UsersContainer extends React.Component {
 
     componentDidMount() {
         this.props.toggleLoading(true);
-        setTimeout(() => {
-            this.getUsers();
-        }, 2000)
+        this.getUsers();
     }
 
     onPageChanged = (page) => {
         console.log(page);
         this.props.setCurrentPage(page.selected);
         this.props.setUsers([]);
-        this.getUsers();
+        this.props.toggleLoading(true);
+        usersApi.getUsers(page.selected, this.props.pageSize).then((res) => {
+            this.props.setUsers(res.data.items);
+            this.props.setTotalUsersCount(res.data.totalCount);
+            this.props.toggleLoading(false);
+        })
     }
 
     getUsers() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then((res) => {
+        usersApi.getUsers(this.props.currentPage, this.props.pageSize).then((res) => {
             this.props.setUsers(res.data.items);
             this.props.setTotalUsersCount(res.data.totalCount);
             this.props.toggleLoading(false);
