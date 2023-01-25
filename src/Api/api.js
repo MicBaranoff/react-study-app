@@ -10,8 +10,18 @@ const Axios = axios.create({
 
 export const usersApi = {
     getUsers(currentPage = 1, pageSize = 10) {
-        return Axios.get(`users?page=${currentPage}&count=${pageSize}`, {
-            withCredentials: true,
-        })
+        return Axios.get(`users?page=${currentPage}&count=${pageSize}`)
+    }
+}
+
+export const profileApi = {
+   getProfile(id = 1) {
+        return Axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${id}`)
+    }
+}
+
+export const authApi = {
+    getAuthStatus() {
+        return Axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`)
     }
 }

@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import {
     setAuthUserData,
 } from "../../../redux/auth-reducer";
+import {authApi} from "../../../Api/api";
 
 class HeaderContainer extends React.Component {
     constructor(props) {
@@ -12,14 +13,11 @@ class HeaderContainer extends React.Component {
     }
 
     componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`,{
-            withCredentials: true,
-        }).then((res) => {
+        authApi.getAuthStatus().then((res) => {
             if (res.data.resultCode === 0) {
                 let { id, login, email } = res.data.data;
                 this.props.setAuthUserData(id, login, email);
             }
-            console.log(res.data );
         })
     }
 
