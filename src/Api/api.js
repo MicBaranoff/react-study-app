@@ -11,6 +11,9 @@ const Axios = axios.create({
 export const usersApi = {
     getUsers(currentPage = 1, pageSize = 10) {
         return Axios.get(`users?page=${currentPage}&count=${pageSize}`)
+    },
+    setFollowStatus(requestType, userID) {
+        return Axios[requestType](`follow/${userID}`)
     }
 }
 

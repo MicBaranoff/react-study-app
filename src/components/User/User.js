@@ -2,6 +2,7 @@ import React from "react";
 import Button from "../ui/Button";
 import {NavLink} from "react-router-dom";
 import axios from "axios";
+import {usersApi} from "../../Api/api";
 
 const user = (props) => {
     return (
@@ -27,26 +28,28 @@ const user = (props) => {
                     </div>
                 </div>
                 <button onClick={() => {
-                    props.followed ?
-                        axios['post'](`https://social-network.samuraijs.com/api/1.0/follow/${props.id}`, {}, {
-                                withCredentials: true,
-                                headers: {
-                                    'API-KEY' : '9e15d9c3-a523-4e71-aeb6-013ec591e7b9'
+                    console.log(props.id);
+                    props.toggleFollowingProgress(props.id, true);
+                    !props.followed ?
+                        usersApi.setFollowStatus('post', props.id).then((res) => {
+                                if (res.data.resultCode === 0) {
+                                    props.toggleFollowingProgress(props.id, false);
+                                    props['followCallback'](props.id)
                                 }
-                            }).then((res) => {
-                                if (res.data.resultCode === 0)  props['followCallback'](props.id)
                         }) :
-                        axios['delete'](`https://social-network.samuraijs.com/api/1.0/follow/${props.id}`, {
-                            withCredentials: true,
-                            headers: {
-                                'API-KEY' : '9e15d9c3-a523-4e71-aeb6-013ec591e7b9'
+                        usersApi.setFollowStatus('delete', props.id).then((res) => {
+                            if (res.data.resultCode === 0) {
+                                props.toggleFollowingProgress(props.id, false);
+                                props['unfollowCallback'](props.id)
                             }
-                        }).then((res) => {
-                            if (res.data.resultCode === 0)  props['unfollowCallback'](props.id)
                         })
                     // !props.followed ? props.followCallback(props.id) : props.unfollowCallback(props.id)
                 }} className={'button ' + 'profile__follow'}>
-                    <span className={'button__text'}>{props.followed ? 'Unfollow' : 'Follow'}</span>
+                    <span className={'button__text'}>{
+                        props.followInProgress.some(item => item === props.id) ?
+                            'loading...' :
+                            (props.followed ? 'Unfollow' : 'Follow')
+                    }</span>
                 </button>
                 {/*<button onClick={() => {*/}
                 {/*        !props.followed ? props.followCallback(props.id) : props.unfollowCallback(props.id)*/}

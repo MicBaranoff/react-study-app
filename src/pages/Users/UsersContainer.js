@@ -5,7 +5,7 @@ import {
     setUsers,
     setCurrentPage,
     setTotalUsersCount,
-    toggleLoading
+    toggleLoading, toggleFollowingProgress
 } from "../../redux/users-reducer";
 import {connect} from "react-redux";
 import axios from "axios";
@@ -23,7 +23,6 @@ class UsersContainer extends React.Component {
     }
 
     onPageChanged = (page) => {
-        console.log(page);
         this.props.setCurrentPage(page.selected);
         this.props.setUsers([]);
         this.props.toggleLoading(true);
@@ -54,6 +53,8 @@ class UsersContainer extends React.Component {
                         onPageChanged={this.onPageChanged}
                         followUser={this.props.followUser}
                         unfollowUser={this.props.unfollowUser}
+                        toggleFollowingProgress={this.props.toggleFollowingProgress}
+                        followInProgress={this.props.followInProgress}
                         users={this.props.users}
                     />
             }
@@ -68,6 +69,7 @@ const mapStateToProps = (state) => {
         totalUsersCount: state.usersReducer.totalUsersCount,
         currentPage: state.usersReducer.currentPage,
         isLoading: state.usersReducer.isLoading,
+        followInProgress: state.usersReducer.followInProgress,
     };
 }
 // const mapDispatchToProps = (dispatch) => {
@@ -100,6 +102,7 @@ const users = connect(mapStateToProps, {
     setCurrentPage,
     setTotalUsersCount,
     toggleLoading,
+    toggleFollowingProgress,
 })(UsersContainer);
 
 export default users;

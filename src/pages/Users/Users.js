@@ -26,6 +26,8 @@ class Users extends React.Component {
                                     id={user.id}
                                     followCallback={this.props.followUser}
                                     unfollowCallback={this.props.unfollowUser}
+                                    toggleFollowingProgress={this.props.toggleFollowingProgress}
+                                    followInProgress={this.props.followInProgress}
                                     followed={user.followed}
                                     className={'users__item'}
                                     name={user.name}
