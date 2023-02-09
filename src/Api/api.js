@@ -19,12 +19,12 @@ export const usersApi = {
 
 export const profileApi = {
    getProfile(id = 1) {
-        return Axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${id}`)
+        return Axios.get(`profile/${id}`)
     }
 }
 
 export const authApi = {
     getAuthStatus() {
-        return Axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`)
+        return Axios.get(`auth/me`)
     }
 }

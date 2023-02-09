@@ -5,12 +5,13 @@ import {
     setUsers,
     setCurrentPage,
     setTotalUsersCount,
-    toggleLoading, toggleFollowingProgress
+    toggleLoading,
+    toggleFollowingProgress,
+    getUsersThunkCreator,
+    setUserFollowStatusThunkCreator,
 } from "../../redux/users-reducer";
 import {connect} from "react-redux";
-import axios from "axios";
 import Users from "./Users";
-import {usersApi} from "../../Api/api";
 
 class UsersContainer extends React.Component {
     constructor(props) {
@@ -19,26 +20,15 @@ class UsersContainer extends React.Component {
 
     componentDidMount() {
         this.props.toggleLoading(true);
-        this.getUsers();
+        this.props.getUsers(this.props.currentPage, this.props.pageSize);
     }
 
     onPageChanged = (page) => {
         this.props.setCurrentPage(page.selected);
         this.props.setUsers([]);
         this.props.toggleLoading(true);
-        usersApi.getUsers(page.selected, this.props.pageSize).then((res) => {
-            this.props.setUsers(res.data.items);
-            this.props.setTotalUsersCount(res.data.totalCount);
-            this.props.toggleLoading(false);
-        })
-    }
-
-    getUsers() {
-        usersApi.getUsers(this.props.currentPage, this.props.pageSize).then((res) => {
-            this.props.setUsers(res.data.items);
-            this.props.setTotalUsersCount(res.data.totalCount);
-            this.props.toggleLoading(false);
-        })
+        this.props.getUsers(page.selected, this.props.pageSize);
+        // this.getUsers(page.selected, this.props.pageSize);
     }
 
     render() {
@@ -51,8 +41,7 @@ class UsersContainer extends React.Component {
                         pageSize={this.props.pageSize}
                         currentPage={this.props.currentPage}
                         onPageChanged={this.onPageChanged}
-                        followUser={this.props.followUser}
-                        unfollowUser={this.props.unfollowUser}
+                        setUserFollowStatus={this.props.setUserFollowStatus}
                         toggleFollowingProgress={this.props.toggleFollowingProgress}
                         followInProgress={this.props.followInProgress}
                         users={this.props.users}
@@ -72,28 +61,6 @@ const mapStateToProps = (state) => {
         followInProgress: state.usersReducer.followInProgress,
     };
 }
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         setUsers: (users) => {
-//             dispatch(setUsers(users));
-//         },
-//         followUser: (userID) => {
-//             dispatch(followUser(userID));
-//         },
-//         unfollowUser: (userID) => {
-//             dispatch(unfollowUser(userID));
-//         },
-//         setCurrentPage: (value) => {
-//             dispatch(setCurrentPage(value));
-//         },
-//         setTotalUsersCount: (value) => {
-//             dispatch(setTotalUsersCount(value));
-//         },
-//         toggleLoading: (value) => {
-//             dispatch(toggleLoading(value));
-//         },
-//     };
-// }
 
 const users = connect(mapStateToProps, {
     setUsers,
@@ -103,6 +70,8 @@ const users = connect(mapStateToProps, {
     setTotalUsersCount,
     toggleLoading,
     toggleFollowingProgress,
+    getUsers: getUsersThunkCreator,
+    setUserFollowStatus: setUserFollowStatusThunkCreator,
 })(UsersContainer);
 
 export default users;

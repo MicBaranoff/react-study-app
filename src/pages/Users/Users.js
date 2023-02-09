@@ -24,8 +24,7 @@ class Users extends React.Component {
                                 return <User
                                     key={user.id + index * Math.random()}
                                     id={user.id}
-                                    followCallback={this.props.followUser}
-                                    unfollowCallback={this.props.unfollowUser}
+                                    setUserFollowStatus={this.props.setUserFollowStatus}
                                     toggleFollowingProgress={this.props.toggleFollowingProgress}
                                     followInProgress={this.props.followInProgress}
                                     followed={user.followed}

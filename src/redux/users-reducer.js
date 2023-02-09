@@ -1,3 +1,5 @@
+import {usersApi} from "../Api/api";
+
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
@@ -78,10 +80,6 @@ const usersReducer = (state = initialState, action) => {
                 isLoading: action.value,
             }
         case TOGGLE_FOLLOWING_PROGRESS:
-            console.log({
-                ...state,
-                followInProgress: [...state.followInProgress, action.userID],
-            })
             return {
                 ...state,
                 followInProgress: action.actionType ?
@@ -121,5 +119,23 @@ export const toggleLoading = (value) => {
 export const toggleFollowingProgress = (userID, actionType) => {
     return {type: TOGGLE_FOLLOWING_PROGRESS, userID, actionType}
 }
+
+export const getUsersThunkCreator = (page, pageSize) => (dispatch) => {
+    usersApi.getUsers(page, pageSize).then((res) => {
+        dispatch(setUsers(res.data.items));
+        dispatch(setTotalUsersCount(res.data.totalCount));
+        dispatch(toggleLoading(false));
+    })
+}
+
+export const setUserFollowStatusThunkCreator = (requestType, userID) => (dispatch) => {
+    usersApi.setFollowStatus(requestType, userID).then((res) => {
+        if (res.data.resultCode === 0) {
+            dispatch(toggleFollowingProgress(userID, false));
+            requestType === 'post' ? dispatch(followUser(userID)) : dispatch(unfollowUser(userID));
+        }
+    })
+}
+
 
 export default usersReducer;
