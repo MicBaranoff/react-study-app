@@ -1,5 +1,6 @@
 import React from "react";
-import Message from '../Message'
+import Message from '../Message';
+
 
 let messageInput = React.createRef();
 class Chat extends React.Component {

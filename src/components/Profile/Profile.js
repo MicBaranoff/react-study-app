@@ -1,4 +1,6 @@
 import React from "react";
+import ProfileStatus from "./ProfileStatus/ProfileStatus";
+import {updateUserStatus} from "../../redux/profile-reducer";
 
 class Profile extends React.Component {
     constructor(props) {
@@ -16,6 +18,10 @@ class Profile extends React.Component {
                     <div className={'profile__name'}>
                         <h3>{ data.fullName }</h3>
                     </div>
+                    <ProfileStatus
+                        status={this.props.status}
+                        updateStatus={this.props.updateUserStatus}
+                    />
                     <div className={'profile__info'}>
                         <ul>
                             <li>

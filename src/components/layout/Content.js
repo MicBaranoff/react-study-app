@@ -3,6 +3,7 @@ import Profile from '../../pages/Profile'
 import Posts from '../../pages/Posts'
 import Dialogs from "../../pages/Dialogs";
 import Home from "../../pages/Home";
+import LoginPage from "../../components/Login/Login";
 import UsersContainer from "../../pages/Users/UsersContainer";
 import {
     BrowserRouter as Router,
@@ -16,6 +17,7 @@ const content = ({className, data, dispatch}) => {
     return (
         <div className={`content ${className}`}>
             <Routes>
+                <Route path='/profile' element={<Profile data={'data'}/>}/>
                 <Route path='/profile/:id' element={<Profile data={'data'}/>}/>
                 <Route path='/posts' element={<Posts
                     newPostTitle={postData.newPostTitle}
@@ -26,6 +28,7 @@ const content = ({className, data, dispatch}) => {
                                                            dispatch={dispatch} data={dialogsData.list}/>}/>
                 <Route index path='/users' element={<UsersContainer/>}/>
                 <Route index path='/' element={<Home/>}/>
+                <Route index path='/login' element={<LoginPage/>}/>
             </Routes>
         </div>
     )

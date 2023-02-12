@@ -2,6 +2,8 @@ import React from "react";
 import {updateNewMessageActionCreator,sendMessageActionCreator} from "../../redux/dialogs-reducer";
 import Chat from "./Chat";
 import {connect} from "react-redux";
+import withAuthRedirectComponent from "../../HOC/AuthRedirect";
+import {compose} from "redux";
 
 //let messageInput = React.createRef();
 //
@@ -26,6 +28,7 @@ import {connect} from "react-redux";
 const mapStateToProps = (state) => {
     return {
         dialogsData: state.dialogsReducer,
+        isAuth: state.authReducer.isAuth,
     }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -40,6 +43,7 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-const chatContainer = connect(mapStateToProps, mapDispatchToProps)(Chat);
-
-export default chatContainer;
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    withAuthRedirectComponent,
+)(Chat);

@@ -20,6 +20,12 @@ export const usersApi = {
 export const profileApi = {
    getProfile(id = 1) {
         return Axios.get(`profile/${id}`)
+    },
+    getStatus(id) {
+        return Axios.get(`profile/status/${id}`)
+    },
+    updateStatus(status) {
+        return Axios.put(`profile/status`, {status})
     }
 }
 
