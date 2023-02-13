@@ -26,11 +26,14 @@ export const profileApi = {
     },
     updateStatus(status) {
         return Axios.put(`profile/status`, {status})
-    }
+    },
 }
 
 export const authApi = {
     getAuthStatus() {
         return Axios.get(`auth/me`)
-    }
+    },
+    loginToProfile(data) {
+        return Axios.post(`auth/login`, data)
+    },
 }

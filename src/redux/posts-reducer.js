@@ -44,8 +44,8 @@ const postsReducer = (state = initialState, action) => {
                 ...state,
                 posts: [...state.posts, {
                     id: state.posts.length++,
-                    title: state.newPostTitle,
-                    text: state.newPostText,
+                    title: action.post.title,
+                    text: action.post.text,
                     img: '/images/post.jpeg',
                 }]
             };
@@ -64,8 +64,8 @@ const postsReducer = (state = initialState, action) => {
     }
 }
 
-export const addPostActionCreator = () => {
-    return {type: ADD_POST}
+export const addPostActionCreator = (post) => {
+    return {type: ADD_POST, post}
 }
 export const updateNewPostTitleActionCreator = (value) => {
     return {

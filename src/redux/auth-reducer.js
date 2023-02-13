@@ -35,4 +35,8 @@ export const getAuthStatus = () => (dispatch) => {
     })
 }
 
+export const loginToProfile = (data) => (dispatch) => {
+    return authApi.loginToProfile(data)
+}
+
 export default authReducer;

@@ -3,27 +3,8 @@ import {updateNewMessageActionCreator,sendMessageActionCreator} from "../../redu
 import Chat from "./Chat";
 import {connect} from "react-redux";
 import withAuthRedirectComponent from "../../HOC/AuthRedirect";
+import withRouter from "../../HOC/withRouter";
 import {compose} from "redux";
-
-//let messageInput = React.createRef();
-//
-//const chatContainer = ({data, dispatch, newMessage}) => {
-//    const updateNewMessage = (text) => {
-//        dispatch(updateNewMessageActionCreator(text));
-//    }
-//    const sendMessage = (text) => {
-//        if (text) dispatch(sendMessageActionCreator());
-//        dispatch(updateNewMessageActionCreator(''));
-//    }
-//    return (
-//        <Chat
-//            data={data}
-//            newMessage={newMessage}
-//            updateNewMessage={updateNewMessage}
-//            sendMessage={sendMessage}
-//        />
-//    )
-//}
 
 const mapStateToProps = (state) => {
     return {
@@ -33,12 +14,8 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        updateNewMessage: (text) => {
-            dispatch(updateNewMessageActionCreator(text));
-        },
         sendMessage: (text) => {
-            if (text) dispatch(sendMessageActionCreator());
-            dispatch(updateNewMessageActionCreator(''));
+            if (text) dispatch(sendMessageActionCreator(text));
         }
     }
 }
@@ -46,4 +23,5 @@ const mapDispatchToProps = (dispatch) => {
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),
     withAuthRedirectComponent,
+    withRouter,
 )(Chat);

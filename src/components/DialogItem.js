@@ -2,7 +2,7 @@ import React from "react";
 import {NavLink} from "react-router-dom";
 
 const dialogItem = (props) => {
-    const path = `/dialogs/${props.id}`
+    const path = `/dialogs/${props.id}?name=${props.name}`
     return (
         <div className="discussion">
             <div className="photo">

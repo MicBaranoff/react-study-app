@@ -1,8 +1,33 @@
 import React from "react";
 import Message from '../Message';
+import {Field, reduxForm} from "redux-form";
 
 
 let messageInput = React.createRef();
+
+const ChatForm = (props) => {
+    return (
+        <div className="footer-chat">
+            <i className="icon fa fa-smile-o clickable" aria-hidden="true"></i>
+            <form onSubmit={props.handleSubmit}>
+                <Field
+                    component={'input'}
+                    name={'message'}
+                    ref={messageInput} type="text"
+                    className="write-message"
+                    placeholder="Type your message here"/>
+                <button className="icon send clickable">
+                    Send
+                </button>
+            </form>
+        </div>
+    )
+}
+
+const ReduxMessageForm = reduxForm({
+    form: 'chat'
+})(ChatForm)
+
 class Chat extends React.Component {
     constructor(props) {
         super(props);
@@ -14,9 +39,13 @@ class Chat extends React.Component {
         this.props.updateNewMessage(text);
     }
 
-    sendBtnHandler() {
+    sendBtnHandler(value) {
         let text = messageInput.current.value;
-        this.props.sendMessage(text);
+        this.props.sendMessage(value);
+    }
+
+    onSubmit = (formData) => {
+        this.sendBtnHandler(formData.message)
     }
 
     render() {
@@ -31,14 +60,10 @@ class Chat extends React.Component {
                         <Message key={index} self={message.self} text={message.text} image={message.avatar}></Message>)
                         }
                     </div>
-                    <div className="footer-chat">
-                        <i className="icon fa fa-smile-o clickable" aria-hidden="true"></i>
-                        <input onChange={this.onChangeMessage.bind(this)} ref={messageInput} type="text" className="write-message"
-                            placeholder="Type your message here" value={this.props.dialogsData.newMessage}></input>
-                        <button onClick={this.sendBtnHandler.bind(this)} className="icon send clickable">
-                            Send
-                        </button>
-                    </div>
+                    <ReduxMessageForm
+                        onSubmit={this.onSubmit}
+                        dialogsData={this.props.dialogsData}
+                        sendBtnHandler={this.sendBtnHandler.bind(this)}/>
                 </section>
             )
     }

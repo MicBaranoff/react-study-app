@@ -158,11 +158,6 @@ let initialState = {
 
 const dialogReducer = (state = initialState, action) => {
     switch (action.type) {
-        case UPDATE_NEW_MESSAGE:
-            return {
-                ...state,
-                newMessage: action.value,
-            };
         case SEND_MESSAGE:
             let stateCopy = {
                 ...state,
@@ -171,7 +166,7 @@ const dialogReducer = (state = initialState, action) => {
             }
             stateCopy.list[state.currentDialogID].chat.push({
                 self: true,
-                text: state.newMessage,
+                text: action.message,
                 avatar: null,
             });
             return stateCopy;
@@ -180,15 +175,8 @@ const dialogReducer = (state = initialState, action) => {
     }
 };
 
-
-export const updateNewMessageActionCreator = (value) => {
-    return {
-        type: UPDATE_NEW_MESSAGE,
-        value,
-    }
-}
-export const sendMessageActionCreator = () => {
-    return {type: SEND_MESSAGE}
+export const sendMessageActionCreator = (message) => {
+    return {type: SEND_MESSAGE, message}
 }
 
 export default dialogReducer;

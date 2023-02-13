@@ -3,7 +3,7 @@ import Profile from '../../pages/Profile'
 import Posts from '../../pages/Posts'
 import Dialogs from "../../pages/Dialogs";
 import Home from "../../pages/Home";
-import LoginPage from "../../components/Login/Login";
+import LoginPage from "../../components/Login/LoginContainer";
 import UsersContainer from "../../pages/Users/UsersContainer";
 import {
     BrowserRouter as Router,
