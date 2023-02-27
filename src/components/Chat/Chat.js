@@ -1,6 +1,8 @@
 import React from "react";
 import Message from '../Message';
 import {Field, reduxForm} from "redux-form";
+import {Input} from "../common/FormsControls/FormsControls";
+import {maxLengthCreator, requiredFiled} from "../../utils/validators";
 
 
 let messageInput = React.createRef();
@@ -9,12 +11,16 @@ const ChatForm = (props) => {
     return (
         <div className="footer-chat">
             <i className="icon fa fa-smile-o clickable" aria-hidden="true"></i>
-            <form onSubmit={props.handleSubmit}>
+            <form className={'form-chat'} onSubmit={props.handleSubmit}>
                 <Field
-                    component={'input'}
+                    component={Input}
                     name={'message'}
                     ref={messageInput} type="text"
                     className="write-message"
+                    validate={[
+                        requiredFiled,
+                        maxLengthCreator(100),
+                    ]}
                     placeholder="Type your message here"/>
                 <button className="icon send clickable">
                     Send

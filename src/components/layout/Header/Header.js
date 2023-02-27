@@ -6,6 +6,10 @@ class Header extends React.Component {
         super(props);
     }
 
+    onLogoutClickHandler() {
+        this.props.logoutProfile()
+    }
+
     render() {
         return  (
             <header className={`header ${this.props.className}`}>
@@ -13,10 +17,11 @@ class Header extends React.Component {
                     <img src="/images/logo.png" alt=""/>
                 </NavLink>
                 <div className={'header__login'}>
+                    <p>{this.props.email}</p>
                     {
                         !this.props.isAuth ?
                             <NavLink to={'/login'}>Login</NavLink> :
-                            <NavLink to={'/login'}>Logout</NavLink>
+                            <button onClick={() => this.onLogoutClickHandler()}>Logout</button>
                     }
                 </div>
             </header>

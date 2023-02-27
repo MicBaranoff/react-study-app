@@ -1,6 +1,8 @@
 import React from "react";
 import Button from "../ui/Button";
 import {Field, reduxForm} from "redux-form";
+import {maxLengthCreator, requiredFiled} from "../../utils/validators";
+import {Input, Textarea} from "../common/FormsControls/FormsControls";
 const postTitle = React.createRef();
 const postText = React.createRef();
 const postImg = React.createRef();
@@ -10,16 +12,17 @@ const PostForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <Field ref={postTitle} className={'input'}
-                   component={'input'}
+                   component={Input}
+                   validate={[requiredFiled, maxLengthCreator(30)]}
                    placeholder={'type your title'}
                    name="postTitle"
             >
             </Field>
             <Field ref={postText} className={'textarea input'}
-                   component={'textarea'}
-                      placeholder={'type your post'}
-                      name="postText">
-                </Field>
+                       component={Textarea}
+                       placeholder={'type your post'}
+                       validate={[requiredFiled, maxLengthCreator(60)]}
+                       name="postText"/>
             <input ref={postImg} type="file"/>
             <div className={'postInput__button'}>
                 <Button text={'Send'}></Button>

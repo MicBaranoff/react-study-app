@@ -14,6 +14,14 @@ import {connect} from "react-redux";
 import Users from "./Users";
 import withAuthRedirectComponent from "../../HOC/AuthRedirect";
 import {compose} from "redux";
+import {
+    getCurrentPage,
+    getFollowInProgress,
+    getIsLoading,
+    getPageSize,
+    getTotalUsersCount,
+    getUsers
+} from "../../redux/user-selector";
 
 class UsersContainer extends React.Component {
     constructor(props) {
@@ -55,12 +63,12 @@ class UsersContainer extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        users: state.usersReducer.users,
-        pageSize: state.usersReducer.pageSize ,
-        totalUsersCount: state.usersReducer.totalUsersCount,
-        currentPage: state.usersReducer.currentPage,
-        isLoading: state.usersReducer.isLoading,
-        followInProgress: state.usersReducer.followInProgress,
+        users: getUsers(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        isLoading: getIsLoading(state),
+        followInProgress: getFollowInProgress(state),
     };
 }
 

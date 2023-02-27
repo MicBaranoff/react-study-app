@@ -6,22 +6,29 @@ const sidebar = ({className}) => {
         <div className={`sidebar ${className}` }>
                 <ul className="sidebar__list">
                     <li className="sidebar__list-item">
-                        <NavLink className={({ isActive }) => (isActive ? "active" : "") + " sidebar__link"} to="/">Home</NavLink>
+                        <NavLink
+                            className={({ isActive }) => (isActive ? "active" : "") + " sidebar__link"}
+                            to="/">Home</NavLink>
                     </li>
                     <li className="sidebar__list-item">
-                        <NavLink className={({ isActive }) => (isActive ? "active" : "") + " sidebar__link"} to="/dialogs">Dialogs</NavLink>
+                        <NavLink
+                            className={({ isActive }) => (isActive ? "active" : "") + " sidebar__link"}
+                            to="/dialogs">Dialogs</NavLink>
                     </li>
                     <li className="sidebar__list-item">
-                        <NavLink className={({ isActive }) => (isActive ? "active" : "") + " sidebar__link"} to="/profile">Profile</NavLink>
+                        <NavLink
+                            className={({ isActive }) => (isActive ? "active" : "") + " sidebar__link"}
+                            to="/profile">Profile</NavLink>
                     </li>
                     <li className="sidebar__list-item">
-                        <NavLink className={({ isActive }) => (isActive ? "active" : "") + " sidebar__link"} to="/posts">Posts</NavLink>
+                        <NavLink
+                            className={({ isActive }) => (isActive ? "active" : "") + " sidebar__link"}
+                            to="/posts">Posts</NavLink>
                     </li>
                     <li className="sidebar__list-item">
-                        <NavLink className={({ isActive }) => (isActive ? "active" : "") + " sidebar__link"} to="/contacts">Contacts</NavLink>
-                    </li>
-                    <li className="sidebar__list-item">
-                        <NavLink className={({ isActive }) => (isActive ? "active" : "") + " sidebar__link"} to="/users">Users</NavLink>
+                        <NavLink
+                            className={({ isActive }) => (isActive ? "active" : "") + " sidebar__link"}
+                            to="/users">Users</NavLink>
                     </li>
                 </ul>
         </div>

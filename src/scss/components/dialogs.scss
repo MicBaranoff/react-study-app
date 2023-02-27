@@ -291,6 +291,11 @@
   border-top: 2px solid #EEE;
 }
 
+.form-chat{
+  width: 100%;
+  display: flex;
+}
+
 .chat .footer-chat .icon {
   margin-left: 30px;
   color:#C0C0C0;
@@ -300,8 +305,6 @@
 .chat .footer-chat .send {
   color:#fff;
   background-color: #4f6ebd;
-  position: absolute;
-  right: 50px;
   padding: 12px 12px 12px 12px;
   border-radius: 50px;
   font-size: 14pt;
@@ -322,7 +325,6 @@
 
 .write-message {
   border:none !important;
-  width:60%;
   height: 50px;
   margin-left: 20px;
   padding: 10px;

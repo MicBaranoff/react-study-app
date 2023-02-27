@@ -183,7 +183,6 @@ const store = {
         }
     },
     _callSubscriber() {
-        console.log('render');
     },
     getState() {
         return this._state;

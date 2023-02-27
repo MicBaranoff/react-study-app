@@ -36,4 +36,7 @@ export const authApi = {
     loginToProfile(data) {
         return Axios.post(`auth/login`, data)
     },
+    logout() {
+        return Axios.delete(`auth/login`)
+    },
 }

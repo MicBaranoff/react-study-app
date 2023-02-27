@@ -15,32 +15,6 @@ let initialState = {
     currentPage: 1,
     isLoading: false,
     followInProgress: [],
-//    users: [
-//        {
-//            id: 1,
-//            name: 'Svetka Komarova',
-//            followed: false,
-//            avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80'
-//        },
-//        {
-//            id: 2,
-//            name: 'Dima Petrov',
-//            followed: true,
-//            avatar: 'https://i.pinimg.com/originals/a9/26/52/a926525d966c9479c18d3b4f8e64b434.jpg'
-//        },
-//        {
-//            id: 3,
-//            name: 'Vova Andrianov',
-//            followed: true,
-//            avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80'
-//        },
-//        {
-//            id: 4,
-//            name: 'Danya Lianka',
-//            followed: false,
-//            avatar: 'https://i.pinimg.com/originals/a9/26/52/a926525d966c9479c18d3b4f8e64b434.jpg'
-//        }
-//    ],
 };
 
 const usersReducer = (state = initialState, action) => {
